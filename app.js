@@ -1,11 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
-const routes = require('./routes')
-
-// подключить роуты
-// подключить обраблтчик ошибок
+const routes = require('./routes');
 
 const app = express();
 const { PORT = 3000 } = process.env;
@@ -19,6 +18,7 @@ mongoose
   });
 
 app.use(express.json());
+app.use(cors({ origin: ['https://movies.kurochkin.nomoredomains.work', 'http://movies.kurochkin.nomoredomains.work'], credentials: true }));
 app.use(cookieParser());
 app.use('/', routes);
 app.listen(PORT, () => {

@@ -5,10 +5,11 @@ const User = require('../models/user');
 const ConflictError = require('../errors/conflict-error');
 const UnauthorizedError = require('../errors/unauthorized-error');
 const NotFoundError = require('../errors/not-found-error');
-const { HTTP_STATUS_OK, HTTP_STATUS_CREATED } = require('../constants/statusCodeConstants')
+const { NODE_ENV, JWT_SECRET } = process.env;
+const { HTTP_STATUS_OK, HTTP_STATUS_CREATED } = require('../constants/statusCodeConstants');
 
 const createUser = (req, res, next) => {
-  const {email, password, name} = req.body;
+  const { email, password, name } = req.body;
   bcrypt.hash(password, 10)
     .then((hash) => {
       User.create({
@@ -35,7 +36,7 @@ const login = (req, res, next) => {
         next(new UnauthorizedError('Invalid user email address or password specified'));
         return;
       }
-      const token = jwt.sign({ _id: user._id }, 'verysecretword', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'verysecretword', { expiresIn: '7d' });
       bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
@@ -73,7 +74,13 @@ const updateUserInfo = (req, res, next) => {
       }
       res.status(HTTP_STATUS_OK).send(updateUser);
     })
-    .catch((e) => next(e));
+    .catch((e) => {
+      if (e.code === 11000) {
+        next(new ConflictError('User with this email has already been created'));
+        return;
+      }
+      next(e);
+    });
 };
 
 module.exports = {
