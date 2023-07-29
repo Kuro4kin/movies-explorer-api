@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { celebrate, Joi, errors } = require('celebrate');
 
-const { requestLogger, errorLogger } = require('../middlewares/logger')
+const { requestLogger, errorLogger } = require('../middlewares/logger');
 const { createUser, login } = require('../controllers/users');
 const auth = require('../middlewares/auth');
 const errorHandler = require('../middlewares/error-handler');
@@ -9,7 +9,7 @@ const userRoutes = require('./user');
 const movieRoutes = require('./movie');
 const NotFoundError = require('../errors/not-found-error');
 
-router.use(requestLogger());
+router.use(requestLogger);
 router.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -31,7 +31,7 @@ router.use(movieRoutes);
 router.use('*', (req, res, next) => {
   next(new NotFoundError('This page not found'));
 });
-router.use(errorLogger());
+router.use(errorLogger);
 router.use(errors());
 router.use(errorHandler);
 
