@@ -5,6 +5,7 @@ const User = require('../models/user');
 const ConflictError = require('../errors/conflict-error');
 const UnauthorizedError = require('../errors/unauthorized-error');
 const NotFoundError = require('../errors/not-found-error');
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 const { HTTP_STATUS_OK, HTTP_STATUS_CREATED } = require('../constants/statusCodeConstants');
 

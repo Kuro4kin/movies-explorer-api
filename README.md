@@ -35,4 +35,4 @@ DELETE /movies/_id - удаляет сохранённый фильм по id
 https://kuro4kin.github.io/movies-explorer-api/
 
 Ссылка на проект:
-https://movies.kurochkin.nomoredomains.work
+https://api.movies.kurochkin.nomoreparties.co
