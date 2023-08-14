@@ -35,5 +35,4 @@ router.use('*', (req, res, next) => {
 router.use(errorLogger);
 router.use(errors());
 router.use(errorHandler);
-
 module.exports = router;
