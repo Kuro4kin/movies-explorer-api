@@ -18,7 +18,7 @@ mongoose
   });
 
 app.use(express.json());
-app.use(cors({ origin: ['https://movies.kurochkin.nomoredomains.work', 'http://movies.kurochkin.nomoredomains.work'], credentials: true }));
+app.use(cors({ origin: ['https://movies.kurochkin.nomoredomains.work', 'http://movies.kurochkin.nomoredomains.work', 'http://localhost:3000'], credentials: true }));
 app.use(cookieParser());
 app.use('/', routes);
 app.listen(PORT, () => {
