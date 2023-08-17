@@ -24,7 +24,7 @@ router.post('/signin', celebrate({
   }),
 }), login);
 router.delete('/signout', (req, res) => {
-  res.status(202).clearCookie('jwt').send('cookie cleared');
+  res.status(202).clearCookie('jwt', { sameSite: 'none'}).send('cookie cleared');
 });
 router.use(auth);
 router.use(userRoutes);
