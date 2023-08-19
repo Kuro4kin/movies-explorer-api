@@ -14,8 +14,8 @@ router.post('/movies', celebrate({
     image: Joi.string().required().pattern(URL_REGEX),
     trailerLink: Joi.string().required().pattern(URL_REGEX),
     thumbnail: Joi.string().required().pattern(URL_REGEX),
-    nameRU: Joi.string().required().pattern(NAME_RU),
-    nameEN: Joi.string().required().pattern(NAME_EN),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }).unknown(true),
 }), createMovie);
 router.get('/movies', getMovies);
