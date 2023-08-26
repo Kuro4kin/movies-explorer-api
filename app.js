@@ -21,9 +21,8 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      'https://movies.kurochkin.nomoredomains.co',
-      'http://movies.kurochkin.nomoredomains.co',
-      'http://localhost:3000',
+      'https://movies.kurochkin.nomoreparties.co',
+      'http://movies.kurochkin.nomoreparties.co',
     ],
     credentials: true,
   }),
