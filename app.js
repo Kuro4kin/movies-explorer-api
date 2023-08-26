@@ -23,6 +23,7 @@ app.use(
     origin: [
       'https://movies.kurochkin.nomoreparties.co',
       'http://movies.kurochkin.nomoreparties.co',
+      'http://localhost:3000',
     ],
     credentials: true,
   }),
